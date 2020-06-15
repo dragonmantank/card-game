@@ -1,0 +1,7 @@
+{
+   "name": "cardgame",
+   "main": "index.js",
+   "scripts": {
+      "start": "node index.js"
+   }
+}

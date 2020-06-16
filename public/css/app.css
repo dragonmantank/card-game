@@ -4,9 +4,9 @@ body, html {
 }
 
 #cardtable {
+   display: inline-block; 
    background-color: darkgreen;
    position: relative;
-   left: 380px;
    width: 100%;
    height: 100%;
    margin-left: auto;
@@ -20,23 +20,90 @@ body, html {
    margin-left: auto;
    margin-right: auto;
 }
-
-#subscriber {
-   position: absolute;
-   width: 360px;
-   height: 240px;
-   left: 10px;
+#player0-hand{
+   position: relative;
+   display: inline-block; 
    top: 10px;
+   left: 10px;
+   vertical-align: top;
+}
+#result0{
+   position: absolute;
+   bottom: 0;
+   left: 0;
+}
+#result1{
+   position: absolute;
+   bottom: 0;
+   left: 0;
+}
+#player1-hand{
+   position: relative;
+   display: inline-block; 
+   vertical-align: top;
+   top: 10px;
+   left: 10px;
+}
+#player0-deck{
+   float: left;
+   position: relative; 
+   width: 200px
+}
+#player1-deck{
+   float: left;
+   position: relative; 
+   width: 200px
+}
+
+#player0{
+   position: relative;
+   width: 100%;
+   height: 300;
+   margin-left: auto;
+   margin-right: auto;
+}
+#gamearea0{
+   top: 10px;
+   left: 10px;
+   position: relative;
+   width: 80%;
+   float: right;
+   height: 300;
+}
+#gamearea1{
+   top: 10px;
+   left: 10px;
+   position: relative;
+   float: right;
+   width: 80%;
+   height: 300;
+}
+#player1{
+   float: left;
+   position: relative;
+   width: 100%;
+   height: 300;
+   margin-left: auto;
+   margin-right: auto;
+}
+#subscriber {
+   position: relative;
+   float: left;
+   width: 18%;
+   height: 240px;
+   top: 10px;
+   left: 10px;
    z-index: 20;
    border: 3px solid white;
    border-radius: 3px;
 }
 
 #publisher {
-   position: absolute;
-   width: 360px;
+   position: relative;
+   float: left;
+   width: 18%;
    height: 240px;
-   bottom: 10px;
+   top: 10px;
    left: 10px;
    z-index: 20;
    border: 3px solid white;
@@ -44,6 +111,7 @@ body, html {
 }
 
 .hand {
+   position: absolute;
    width: 200px;
    height: 270px;
    border-color: black;

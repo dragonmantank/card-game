@@ -52,7 +52,10 @@ export const WarCardGame = {
             endIf: (G, ctx) => {
                 return G.hand[0].length == 0 && G.hand[1].length == 0;
             },
-            next: 'draw'
+            next: 'draw',
+            onEnd: (G, ctx) => {
+                ctx.currentPlayer = 0;
+            }
         }
 
     },

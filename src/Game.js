@@ -26,6 +26,9 @@ class WarCardGameClient {
   update(state) {
     document.getElementById('player0-hand-size').innerText = state.G.decks[0].length;
     document.getElementById('player1-hand-size').innerText = state.G.decks[1].length;
+
+    document.getElementById('player' + state.ctx.currentPlayer).classList.add('current-player');
+    document.getElementById('player' + (state.ctx.currentPlayer == 0 ? 1 : 0)).classList.remove('current-player');
   }
 }
 

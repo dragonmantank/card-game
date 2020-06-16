@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "debug-game": "parcel index.html --open"
+    "debug-game": "parcel public/index.html --open"
   },
   "repository": {
     "type": "git",

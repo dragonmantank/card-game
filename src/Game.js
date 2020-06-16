@@ -1,50 +1,34 @@
-import { INVALID_MOVE } from 'boardgame.io/core';
+import { Client } from 'boardgame.io/client';
+import { WarCardGame } from './WarCardGame';
 
-function DrawCard(G, ctx) {
-    G.hand[ctx.currentPlayer].push(G.decks[ctx.currentPlayer].shift());
-}
+class WarCardGameClient {
+  constructor() {
+    this.client = Client({ game: WarCardGame });
+    this.client.start();
+    this.client.subscribe(state => this.update(state));
 
-function ResolveCards(G, ctx) {
-    console.log("Resolving");
+  }
 
-    const playerOne = G.hand[0][G.hand[0].length - 1];
-    const playerTwo = G.hand[1][G.hand[1].length - 1];
-
-    if (playerOne > playerTwo) {
-        G.decks[0].push(playerOne, playerTwo);
-    } else {
-        G.decks[1].push(playerTwo, playerOne);
+  attachListeners() {
+    const handleDrawCard = event => {
+      this.client.moves.DrawCard();
     }
-    G.hand[0] = [];
-    G.hand[1] = [];
+
+    const handleResolveGame = event => {
+      this.client.moves['ResolveCards']();
+    }
+
+    document.getElementById('player0-deck').onclick = handleDrawCard;
+    document.getElementById('player1-deck').onclick = handleDrawCard;
+    document.getElementById('endbutton').onclick = handleResolveGame;
+  }
+
+  update(state) {
+    document.getElementById('player0-hand-size').innerText = state.G.decks[0].length;
+    document.getElementById('player1-hand-size').innerText = state.G.decks[1].length;
+  }
 }
 
-export const WarCardGame = {
-    setup: ctx => ({
-        numPlayers: 2,
-        decks: [
-            [1,4,5,6,7],
-            [5,7,3,8,6]
-        ],
-        hand: Array(ctx.numPlayers).fill([]),
-    }),
-    phases: {
-        draw: { 
-            moves: { DrawCard },
-            start: true,
-            endIf: (G, ctx) => {
-                return G.hand[0].length == 1 && G.hand[1].length == 1
-            },
-            next: 'resolve',
-        },
-        resolve: {
-            moves: { ResolveCards },
-            endIf: (G, ctx) => {
-                return G.hand[0].length == 0 && G.hand[1].length == 0;
-            },
-            next: 'draw'
-        }
-
-    },
-    turn: { moveLimit: 1 },
-}
+const appElement = document.getElementById('carrdtable')
+const app = new WarCardGameClient(appElement);
+app.attachListeners();

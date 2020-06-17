@@ -1,0 +1,37 @@
+<html>
+<head>
+   <title> A Very Exciting Card Game </title>
+   <link href="css/app.css" rel="stylesheet" type="text/css">
+   
+</head>
+<body>
+   <div id="videos">
+      <div id="cardtable">
+         
+      </div>
+      <div id="subscriber"></div>
+      <div id="publisher"></div>
+   </div>
+
+   <template id="cardgame">
+      <div id="winner-banner">Hello</div>
+      <button id="endbutton">End Round</button>
+      <div id="player0">
+         <div id="result0">Cards Left: <span id="player0-hand-size"></span></div>
+         <div id="gamearea0">
+            <img id="player0-deck" src="images/cardback.png" >
+            <div class="hand" id="player0-hand" ></div>
+         </div>
+      </div>
+
+      <div id="player1">
+         <div id="result1">Cards Left: <span id="player1-hand-size"></span></div>
+         <div id="gamearea1">
+            <img id="player1-deck" src="images/cardback.png" >
+            <div class="hand" id="player1-hand" ></div>
+         </div>
+      </div>
+   </template>
+   <script type="text/javascript" src="./../src/Game.js"></script>
+</body>
+</html>

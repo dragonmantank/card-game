@@ -8,10 +8,16 @@
 <body>
    <div id="videos">
       <div id="cardtable">
-         <div id="winner-banner">Hello</div>
+         
+      </div>
+      <div id="subscriber" style="display: none;"></div>
+      <div id="publisher" style="display: none;"></div>
+   </div>
+
+   <template id="cardgame">
+      <div id="winner-banner">Hello</div>
          <button id="endbutton">End Round</button>
          <div id="player0">
-            <div id="publisher"></div>
             <div id="result0">Cards Left: <span id="player0-hand-size"></span></div>
             <div id="gamearea0">
                <img id="player0-deck" src="images/cardback.png" >
@@ -20,15 +26,14 @@
          </div>
 
          <div id="player1">
-            <div id="subscriber"></div>
             <div id="result1">Cards Left: <span id="player1-hand-size"></span></div>
             <div id="gamearea1">
                <img id="player1-deck" src="images/cardback.png" >
                <div class="hand" id="player1-hand" ></div>
             </div>
          </div>
-      </div>
-   </div>
+   </template>
+
    <script type="text/javascript" src="js/app.js"></script>
    <script type="text/javascript" src="./../src/Game.js"></script>
 </body>

@@ -39,11 +39,14 @@ function shuffle(deck)
 function DrawCard(G, ctx) {
     const player = ctx.currentPlayer;
     G.hand[player].push(G.decks[player].shift());
-
-    document.getElementById('player' + player + '-hand').innerHTML = G.hand[player][0]['Value'] + " " + G.hand[player][0]['Suit'];
 }
 
 function ResolveCards(G, ctx) {
+    G.hand[0] = [];
+    G.hand[1] = [];
+}
+
+function calculateWinner(G) {
     let playerOne = G.hand[0][G.hand[0].length - 1]['Value'];
     let playerTwo = G.hand[1][G.hand[1].length - 1]['Value'];
 
@@ -65,14 +68,9 @@ function ResolveCards(G, ctx) {
         winner = 1;
     }
 
-    document.getElementById('winner-banner').innerHTML = '<span class="banner">Player ' + winner + ' wins!</span>';
-
-    G.hand[0] = [];
-    G.hand[1] = [];
-
-    document.getElementById('player0-hand').innerHTML = '';
-    document.getElementById('player1-hand').innerHTML = '';
+    G.winner = winner;
 }
+
 
 function getDecks()
 {
@@ -97,6 +95,9 @@ export const WarCardGame = {
             endIf: (G, ctx) => {
                 return G.hand[0].length == 1 && G.hand[1].length == 1
             },
+            onEnd: (G, ctx) => {
+                calculateWinner(G);
+            },
             next: 'resolve',
         },
         resolve: {
@@ -105,11 +106,7 @@ export const WarCardGame = {
                 return G.hand[0].length == 0 && G.hand[1].length == 0;
             },
             next: 'draw',
-            onEnd: (G, ctx) => {
-                ctx.currentPlayer = 0;
-            }
-        }
-
+        },
     },
     turn: { moveLimit: 1 },
 }

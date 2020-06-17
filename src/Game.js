@@ -17,6 +17,18 @@ function SplashScreen(rootElement) {
   });
 }
 
+function generateCardHTML(card) {
+  const suits = {
+    spades: { color: 'black', character: '&spadesuit;' },
+    clubs: { color: 'black', character: '&clubs;' },
+    diamonds: { color: 'red', character: '&diamondsuit;' },
+    hearts: { color: 'red', character: '&heartsuit;' }
+  }
+
+  let template = `<div class="card" style="color: ${suits[card.Suit].color}">${card.Value} ${suits[card.Suit].character}</div>`;
+  return template;
+}
+
 class WarCardGameClient {
   constructor(rootElement, { playerID } = {}) {
     this.rootElement = rootElement;
@@ -73,15 +85,11 @@ class WarCardGameClient {
     }
 
     if (state.G.hand[0].length == 1) {
-      console.log("Making 1 hand");
-      const hand = state.G.hand[0][0]['Value'] + " " + state.G.hand[0][0]['Suit'];
-      console.log(hand);
-      document.getElementById('player0-hand').innerText = hand;
+      document.getElementById('player0-hand').innerHTML = generateCardHTML(state.G.hand[0][0]);
     }    
 
     if (state.G.hand[1].length == 1) {
-      console.log("Making 2 hand");
-      document.getElementById('player1-hand').innerHTML = state.G.hand[1][0]['Value'] + " " + state.G.hand[1][0]['Suit'];
+      document.getElementById('player1-hand').innerHTML = generateCardHTML(state.G.hand[1][0]);
     }
 
     if (state.G.hand[1].length == 1 && state.G.hand[0].length == 1) {

@@ -17,7 +17,7 @@ function SplashScreen(rootElement) {
       rootElement.append(button);
     };
     rootElement.innerHTML = ` <p>Play as</p>`;
-    const playerIDs = ['0', '1'];
+    const playerIDs = ['0', '1', 'Spectator'];
     playerIDs.forEach(createButton);
   });
 }

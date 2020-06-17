@@ -25,7 +25,12 @@ function handleError(error) {
    
    // Subscribe to a newly created stream
    session.on('streamCreated', function(event) {
-      session.subscribe(event.stream, 'subscriber', {
+      let count = document.getElementById('subscriber').childElementCount();
+      let elem = 'subscriber';
+      if (count > 0) {
+         elem = 'spectator';
+      }
+      session.subscribe(event.stream, elem, {
          insertMode: 'append',
          width: '100%',
          height: '100%'

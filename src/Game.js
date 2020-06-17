@@ -22,7 +22,7 @@ class WarCardGameClient {
     this.rootElement = rootElement;
     this.client = Client({
       game: WarCardGame,
-      multiplayer: SocketIO({ server: 'localhost:8000' }),
+      multiplayer: SocketIO({ server: window.location.protocol + '//' + window.location.hostname + ':8000' }),
       playerID
     });
     this.createGameBoard();

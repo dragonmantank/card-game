@@ -3,12 +3,17 @@ import { Client } from 'boardgame.io/client';
 import { SocketIO } from 'boardgame.io/multiplayer';
 import { WarCardGame } from './WarCardGame';
 
+let localPlayerID = 0;
+
 function SplashScreen(rootElement) {
   return new Promise(resolve => {
     const createButton = playerID => {
       const button = document.createElement('button');
       button.textContent = 'Player ' + playerID;
-      button.onclick = () => resolve(playerID);
+      button.onclick = () => {
+        localPlayerID = playerID;
+        resolve(playerID);
+      }
       rootElement.append(button);
     };
     rootElement.innerHTML = ` <p>Play as</p>`;
@@ -37,6 +42,7 @@ class WarCardGameClient {
       multiplayer: SocketIO({ server: window.location.protocol + '//' + window.location.hostname + ':8000' }),
       playerID
     });
+    console.log(localPlayerID);
     this.createGameBoard();
     this.client.start();
     this.client.subscribe(state => this.update(state));
@@ -50,8 +56,15 @@ class WarCardGameClient {
     // Show the videos once you select a player ID
     let subscriber = document.getElementById('subscriber');
     let publisher = document.getElementById('publisher');
-    document.getElementById('player1').prepend(subscriber);
-    document.getElementById('player0').prepend(publisher);
+
+    if (localPlayerID == 0) {
+      document.getElementById('player1').prepend(subscriber);
+      document.getElementById('player0').prepend(publisher);
+    } else if (localPlayerID == 1) {
+      document.getElementById('player1').prepend(publisher);
+      document.getElementById('player0').prepend(subscriber);
+    }
+    
     subscriber.style.display = 'inherit';
     publisher.style.display = 'inherit';
   }
